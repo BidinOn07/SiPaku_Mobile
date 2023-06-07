@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, prefer_interpolation_to_compose_strings, await_only_futures, unnecessary_overrides, prefer_const_constructors
 
 import 'dart:io';
 import 'package:flutter/material.dart';

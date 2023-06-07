@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, prefer_const_constructors, sort_child_properties_last, unnecessary_overrides, unnecessary_null_comparison, sized_box_for_whitespace
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -215,14 +217,12 @@ class PickerController extends GetxController with StateMixin {
   Rx<XFile> image = XFile('').obs;
   @override
   void onInit() {
-    // TODO: implement onInit
     change(null, status: RxStatus.empty());
     super.onInit();
   }
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
   }
 

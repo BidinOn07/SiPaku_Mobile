@@ -52,7 +52,7 @@ class _SelectionButtonState extends State<SelectionButton> {
         final data = e.value;
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: _Button(
             selected: selected == index,
             onPressed: () {
@@ -99,11 +99,11 @@ class _Button extends StatelessWidget {
           child: Row(
             children: [
               _icon((!selected) ? data.icon : data.activeIcon),
-              const SizedBox(width: kSpacing / 2),
+              const SizedBox(width: kSpacing / 4),
               Expanded(child: _labelText(data.label)),
               if (data.totalNotif != null)
                 Padding(
-                  padding: const EdgeInsets.only(left: kSpacing / 2),
+                  padding: const EdgeInsets.only(left: kSpacing / 4),
                   child: _notif(data.totalNotif!),
                 )
             ],
@@ -132,7 +132,7 @@ class _Button extends StatelessWidget {
             : Theme.of(Get.context!).primaryColor,
         fontWeight: FontWeight.w600,
         letterSpacing: .8,
-        fontSize: 13,
+        fontSize: 17,
       ),
     );
   }

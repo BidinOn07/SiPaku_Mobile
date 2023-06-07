@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 part of ubah_profil;
 
 class UbahPasswordController extends GetxController {
@@ -13,16 +15,16 @@ class UbahPasswordController extends GetxController {
     const Tab(text: "Edit Profil"),
   ];
 
-  /*@override
-  void onClose() {
-    controller.dispose();
-    super.onClose();
-  }*/
+  // @override
+  // void onClose() {
+  //   controller.dispose();
+  //   super.onClose();
+  // }
 
-  /* void tabIndexActive() {
-    activeTabIndex.value = tabController.index;
-    print(activeTabIndex.value);
-  }*/
+  // void tabIndexActive() {
+  //   activeTabIndex.value = tabController.index;
+  //   print(activeTabIndex.value);
+  // }
 
   void onClickRadioButtonJenisKelamin(value) {
     selectJenisKelamin.value = value;

@@ -1,8 +1,15 @@
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, unused_import, non_constant_identifier_names
+
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:sipaku/app/components/sidebar.dart';
 import 'package:sipaku/app/daftarpenyakit/views/daftarpenyakit_view.dart';
+import 'package:sipaku/app/dashboard/views/dashboard_view.dart';
 
+import '../../components/responsive_builder.dart';
+import '../../constans/app_constants.dart';
 
 class DiagnosaView extends StatefulWidget {
   const DiagnosaView({super.key});
@@ -37,15 +44,7 @@ class _DiagnosaViewState extends State<DiagnosaView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: (ResponsiveBuilder.isDesktop(context))
-      //     ? null
-      //     : Drawer(
-      //         child: Padding(
-      //           padding: const EdgeInsets.only(top: kSpacing),
-      //           child: _Sidebar(data: controller.getSelectedProject()),
-      //         ),
-      //       ),
-      appBar: _appBarZ(),
+      appBar: _AppBarZ(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -99,94 +98,13 @@ class _DiagnosaViewState extends State<DiagnosaView> {
       ),
     );
   }
-}
 
-// class _Sidebar extends StatelessWidget {
-//   const _Sidebar({
-//     required this.data,
-//     Key? key,
-//   }) : super(key: key);
-
-//   final ProjectCardData data;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       color: Theme.of(context).cardColor,
-//       child: SingleChildScrollView(
-//         controller: ScrollController(),
-//         child: Column(
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.all(kSpacing),
-//               child: ProjectCard(
-//                 data: data,
-//               ),
-//             ),
-//             const Divider(thickness: 1),
-//             SelectionButton(
-//               data: [
-//                 SelectionButtonData(
-//                   activeIcon: EvaIcons.grid,
-//                   icon: EvaIcons.gridOutline,
-//                   label: "Beranda  ",
-//                   onTap: () {
-//                     Get.to(() => DashboardScreen());
-//                   },
-//                 ),
-//                 SelectionButtonData(
-//                   activeIcon: EvaIcons.archive,
-//                   icon: EvaIcons.archiveOutline,
-//                   label: "Daftar Penyakit",
-//                   onTap: () {
-//                     Get.to(() => DaftarPenyakit());
-//                   },
-//                 ),
-//                 SelectionButtonData(
-//                   activeIcon: EvaIcons.calendar,
-//                   icon: EvaIcons.calendarOutline,
-//                   label: "Diagnosa",
-//                   onTap: () {
-//                     Get.to(() => Diagnosa());
-//                   },
-//                 ),
-//                 SelectionButtonData(
-//                   activeIcon: EvaIcons.email,
-//                   icon: EvaIcons.emailOutline,
-//                   label: "Deteksi",
-//                   onTap: () {
-//                     Get.to(() => DeteksiView(), binding: DashboardBinding());
-//                   },
-//                 ),
-//                 SelectionButtonData(
-//                   activeIcon: EvaIcons.person,
-//                   icon: EvaIcons.personOutline,
-//                   label: "Profil",
-//                 ),
-//                 SelectionButtonData(
-//                   activeIcon: EvaIcons.settings,
-//                   icon: EvaIcons.settingsOutline,
-//                   label: "Log Out ",
-//                 ),
-//               ],
-//               onSelected: (index, value) {
-//                 log("index : $index | label : ${value.label}");
-//               },
-//             ),
-//             const Divider(thickness: 1),
-//             const SizedBox(height: kSpacing * 2),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-AppBar _appBarZ() {
-  return AppBar(
-    title: Column(
-      children: [Text("Diagnosa")],
-    ),
-    centerTitle: true,
-  );
+  AppBar _AppBarZ() {
+    return AppBar(
+      title: Column(
+        children: [Text("Diagnosa")],
+      ),
+      centerTitle: true,
+    );
+  }
 }

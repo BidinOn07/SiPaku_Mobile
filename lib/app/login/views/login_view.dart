@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, unused_field, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

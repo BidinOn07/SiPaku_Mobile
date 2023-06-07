@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 part of ubah_profil;
 
 class UbahAkunController extends GetxController with GetSingleTickerProviderStateMixin{

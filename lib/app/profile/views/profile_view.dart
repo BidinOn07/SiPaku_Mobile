@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 library profil;
 
 import 'package:flutter/material.dart';
@@ -6,7 +8,6 @@ import 'package:sipaku/app/login/views/login_view.dart';
 
 import '../../constans/app_constants.dart';
 import '../controllers/profile_controller.dart';
-
 
 class ProfilView extends GetView<ProfilController> {
   const ProfilView({Key? key}) : super(key: key);

@@ -14,6 +14,7 @@ import '../../profile/bindings/profile_binding.dart';
 import '../../profile/ubah_profile/views/screens/ubah_akun_screen.dart';
 import '../../profile/ubah_profile/views/screens/ubah_password_screen.dart';
 import '../../profile/views/profile_view.dart';
+
 import '../../sign_in/bindings/sign_in_binding.dart';
 import '../../sign_in/views/sign_in_view.dart';
 import '../../splash/bindings/splash_binding.dart';

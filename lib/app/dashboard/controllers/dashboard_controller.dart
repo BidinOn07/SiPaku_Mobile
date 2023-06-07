@@ -1,9 +1,14 @@
+// ignore_for_file: prefer_const_constructors, unnecessary_overrides
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../components/project_card.dart';
 import '../../components/task_card.dart';
 import '../../constans/app_constants.dart';
+import '../../daftarpenyakit/views/daftarpenyakit_view.dart';
+import '../../deteksi/views/deteksi_view.dart';
+import '../../diagnosa/views/diagnosa_view.dart';
 import '../../utils/helpers/app_helpers.dart';
 
 class DashboardController extends GetxController {
@@ -39,6 +44,9 @@ class DashboardController extends GetxController {
           AssetImage(ImageRasterPath.avatar3),
           AssetImage(ImageRasterPath.avatar4),
         ],
+        onPressed: () {
+          Get.to(() => DaftarpenyakitView());
+        },
       ),
       TaskCardData(
         title: "Diagnosa",
@@ -52,6 +60,9 @@ class DashboardController extends GetxController {
           AssetImage(ImageRasterPath.avatar7),
           AssetImage(ImageRasterPath.avatar8),
         ],
+        onPressed: () {
+          Get.to(() => DiagnosaView());
+        },
       ),
       TaskCardData(
         title: "Deteksi",
@@ -65,26 +76,17 @@ class DashboardController extends GetxController {
           AssetImage(ImageRasterPath.avatar4),
           AssetImage(ImageRasterPath.avatar2),
         ],
-      ),
-      TaskCardData(
-        title: "Temukan Dokter Terdekat",
-        dueDay: 2,
-        totalComments: 50,
-        type: TaskType.selengkapnya,
-        totalContributors: 30,
-        profilContributors: [
-          AssetImage(ImageRasterPath.avatar4),
-        ],
+        onPressed: () {
+          Get.to(() => DeteksiView());
+        },
       ),
     ];
   }
 
   ProjectCardData getSelectedProject() {
     return ProjectCardData(
-      // percent: .3,
-      projectImage: const AssetImage(ImageRasterPath.logo1),
-      projectName: "Marketplace Mobile",
-      // releaseTime: DateTime.now(),
+      projectImage: const AssetImage('assets/images/logo_sipaku.png'),
+      projectName: "SiPaku",
     );
   }
 }

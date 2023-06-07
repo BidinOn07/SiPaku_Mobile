@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:developer';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -30,6 +32,9 @@ class Sidebar extends StatelessWidget {
         controller: ScrollController(),
         child: Column(
           children: [
+            SizedBox(
+              height: 40,
+            ),
             Padding(
               padding: const EdgeInsets.all(kSpacing),
               child: ProjectCard(

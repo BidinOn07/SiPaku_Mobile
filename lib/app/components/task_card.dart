@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +20,7 @@ class TaskCardData {
     required this.totalComments,
     required this.totalContributors,
     required this.type,
-    required this.profilContributors,
+    required this.profilContributors, required Null Function() onPressed,
   });
 }
 

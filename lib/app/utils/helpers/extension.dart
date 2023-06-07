@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, prefer_const_constructors
+
 part of app_helpers;
 
 extension TaskTypeExtension on TaskType {
@@ -5,17 +7,17 @@ extension TaskTypeExtension on TaskType {
     switch (this) {
       case TaskType.selengkapnya:
         onTap() {
-          // Get.to(() => DaftarPenyakit());
+          Get.to(() => DaftarpenyakitView());
         }
         return Colors.lightBlue;
       case TaskType.progres:
         onTap() {
-          // Get.to(() => DeteksiView());
+          Get.to(() => DeteksiView());
         }
         return Colors.red;
       default:
         onTap() {
-          // Get.to(() => Diagnosa());
+          Get.to(() => DiagnosaView());
         }
         return Colors.green;
     }
@@ -25,17 +27,17 @@ extension TaskTypeExtension on TaskType {
     switch (this) {
       case TaskType.done:
         onTap() {
-          // Get.to(() => Diagnosa());
+          Get.to(() => DiagnosaView());
         }
         return "Selesai";
       case TaskType.progres:
         onTap() {
-          // Get.to(() => Diagnosa());
+          Get.to(() => DiagnosaView());
         }
         return "Progres";
       default:
         onTap() {
-          // Get.to(() => Diagnosa());
+          Get.to(() => DiagnosaView());
         }
         return "Selengkapnya";
     }
