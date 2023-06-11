@@ -57,7 +57,7 @@ class Sidebar extends StatelessWidget {
                   icon: EvaIcons.archiveOutline,
                   label: "Daftar Penyakit",
                   onTap: () {
-                    Get.to(() => DaftarpenyakitView());
+                    Get.to(() => DaftarPenyakitView());
                   },
                 ),
                 SelectionButtonData(

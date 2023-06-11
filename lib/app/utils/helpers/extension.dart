@@ -7,7 +7,7 @@ extension TaskTypeExtension on TaskType {
     switch (this) {
       case TaskType.selengkapnya:
         onTap() {
-          Get.to(() => DaftarpenyakitView());
+          Get.to(() => DaftarPenyakitView());
         }
         return Colors.lightBlue;
       case TaskType.progres:

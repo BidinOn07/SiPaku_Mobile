@@ -1,194 +1,106 @@
-// ignore_for_file: prefer_const_constructors, unused_element, sort_child_properties_last, deprecated_member_use
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
 import '../../constans/app_constants.dart';
-import '../controllers/daftarpenyakit_controller.dart';
+import '../../urls/urls.dart';
 
-class DaftarpenyakitView extends GetView<DaftarpenyakitController> {
-  const DaftarpenyakitView({Key? key}) : super(key: key);
+class DaftarPenyakitView extends StatefulWidget {
+  const DaftarPenyakitView({super.key});
+
+  @override
+  State<DaftarPenyakitView> createState() => _DaftarpenyakitViewState();
+}
+
+class _DaftarpenyakitViewState extends State<DaftarPenyakitView> {
+  List<Map<String, dynamic>> penyakitlist = [];
+
+  void getPenyakit() async {
+    var urls = Urls();
+    var userList = await urls.getPenyakit();
+
+    userList.forEach((penyakit) {
+      Map<String, dynamic> penyakitMap = {
+        'nama': penyakit.nama,
+        'kode': penyakit.kode,
+        'penyebab': penyakit.penyebab,
+      };
+      penyakitlist.add(penyakitMap);
+    });
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPenyakit();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: (ResponsiveBuilder.isDesktop(context))
-      //     ? null
-      //     : Drawer(
-      //         child: Padding(
-      //           padding: const EdgeInsets.only(top: kSpacing),
-      //           child: _Sidebar(data: controller.getSelectedProject()),
-      //         ),
-      //       ),
       appBar: AppBar(
-          title: const Text('Daftar Penyakit'),
-          backgroundColor: Colors.lightBlue),
+        title: const Text('Daftar Penyakit'),
+        backgroundColor: Colors.lightBlue,
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(18.0),
             child: Column(
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width - 50,
-                  padding: const EdgeInsets.all(15),
-                  height: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: const Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Penyakit 1",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Lihat daftar penyakit kulit yang ada di sistem ini",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500),
-                            )
-                          ],
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: penyakitlist.length,
+                    itemBuilder: (context, index) {
+                      return IntrinsicWidth(
+                        child: Container(
+                          padding: const EdgeInsets.all(30),
+                          decoration: BoxDecoration(
+                            color: Colors.lightBlue,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${penyakitlist[index]['nama']}",
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 50,
+                                    ),
+                                    Text(
+                                      "${penyakitlist[index]['penyebab']}",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Icon(
+                                Icons.note,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Icon(
-                        Icons.note,
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width - 50,
-                  padding: const EdgeInsets.all(15),
-                  height: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: const Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Penyakit 2",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Lihat daftar penyakit kulit yang ada di sistem ini",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
-                      Icon(
-                        Icons.note,
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width - 50,
-                  padding: const EdgeInsets.all(15),
-                  height: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: const Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Penyakit 3",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Lihat daftar penyakit kulit yang ada di sistem ini",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
-                      Icon(
-                        Icons.note,
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width - 50,
-                  padding: const EdgeInsets.all(15),
-                  height: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: const Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Penyakit 4",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Lihat daftar penyakit kulit yang ada di sistem ini",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
-                      Icon(
-                        Icons.note,
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),

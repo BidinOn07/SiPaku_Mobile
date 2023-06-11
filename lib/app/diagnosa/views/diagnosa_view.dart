@@ -1,15 +1,7 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, unused_import, non_constant_identifier_names
-
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:sipaku/app/components/sidebar.dart';
 import 'package:sipaku/app/daftarpenyakit/views/daftarpenyakit_view.dart';
-import 'package:sipaku/app/dashboard/views/dashboard_view.dart';
-
-import '../../components/responsive_builder.dart';
-import '../../constans/app_constants.dart';
+import 'package:sipaku/app/urls/urls.dart';
 
 class DiagnosaView extends StatefulWidget {
   const DiagnosaView({super.key});
@@ -19,32 +11,40 @@ class DiagnosaView extends StatefulWidget {
 }
 
 class _DiagnosaViewState extends State<DiagnosaView> {
-  List<Map> categories = [
-    {"name": "Kulit memerah", "isChecked": false},
-    {"name": "Kulit seperti bersisik", "isChecked": false},
-    {"name": "Kulit terasa gatal tidak tertahan", "isChecked": false},
-    {"name": "Kulit gatal pada malam hari", "isChecked": false},
-    {"name": "Tumbuh benjolan di permukaan kulit", "isChecked": false},
-    {"name": "tumbuh benjolan merah kecoklatan", "isChecked": false},
-    {"name": "Kulit meradang", "isChecked": false},
-    {"name": "kulit terasa perih", "isChecked": false},
-    {
-      "name": "Gatal dibagian selangkangan kaki/ketiak/leher/dsb",
-      "isChecked": false
-    },
-    {"name": "Tumbuh benjolan merah", "isChecked": false},
-    {"name": "Tumbuh benjolan kecil agak memutih", "isChecked": false},
-    {"name": "Kulit terasa berminyak", "isChecked": false},
-    {"name": "Rasa gatal yang panas", "isChecked": false},
-    {"name": "Rasa gatal yang perih", "isChecked": false},
-    {"name": "Tumbuh benjolan berisi nanah", "isChecked": false},
-    {"name": "Ruam", "isChecked": false},
-  ];
+  List<Map<String, dynamic>> categories = [];
+
+  void getGejala() async {
+    var urls = Urls();
+    var userList = await urls.getGejala();
+
+    userList.forEach((gejala) {
+      Map<String, dynamic> gejalaMap = {
+        'nama': gejala.nama,
+        'kode': gejala.kode,
+        'isChecked': false,
+      };
+      categories.add(gejalaMap);
+    });
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getGejala();
+  }
+
+  void toggleCheckbox(int index) {
+    setState(() {
+      categories[index]['isChecked'] = !categories[index]['isChecked'];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _AppBarZ(),
+      appBar: _buildAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -52,28 +52,30 @@ class _DiagnosaViewState extends State<DiagnosaView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Pilih Gejala yang anda rasakan :",
+                "Pilih Gejala yang Anda Rasakan:",
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 10),
-              Divider(
+              const SizedBox(height: 10),
+              const Divider(
                 color: Colors.lightBlue,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Column(
-                  children: categories.map((favorite) {
-                return CheckboxListTile(
+                children: categories.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  Map<String, dynamic> category = entry.value;
+                  return CheckboxListTile(
                     activeColor: Colors.lightBlue,
                     checkboxShape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
-                    title: Text(favorite["name"]),
-                    value: favorite['isChecked'],
+                    title: Text(category["nama"]),
+                    value: category['isChecked'],
                     onChanged: (val) {
-                      setState(() {
-                        favorite['isChecked'] = val;
-                      });
-                    });
-              }).toList()),
+                      toggleCheckbox(index);
+                    },
+                  );
+                }).toList(),
+              ),
               SizedBox(height: 10),
               Card(
                 color: Colors.lightBlue,
@@ -83,15 +85,17 @@ class _DiagnosaViewState extends State<DiagnosaView> {
                   child: InkWell(
                     splashColor: Colors.white,
                     onTap: () {
-                      Get.to(() => DaftarpenyakitView());
+                      Get.to(() => const DaftarPenyakitView());
                     },
-                    child: Center(
-                        child: Text("Selanjutnya",
-                            style:
-                                TextStyle(fontSize: 20, color: Colors.white))),
+                    child: const Center(
+                      child: Text(
+                        "Selanjutnya",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -99,10 +103,12 @@ class _DiagnosaViewState extends State<DiagnosaView> {
     );
   }
 
-  AppBar _AppBarZ() {
+  AppBar _buildAppBar() {
     return AppBar(
       title: Column(
-        children: [Text("Diagnosa")],
+        children: [
+          Text("Diagnosa"),
+        ],
       ),
       centerTitle: true,
     );

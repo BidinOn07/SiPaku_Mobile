@@ -1,59 +1,45 @@
-import 'dart:convert';
+class GetUserResponse {
+  bool success;
+  List<User> data;
+  String message;
 
-List<User> userFromJson(String str) =>
-    List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
+  GetUserResponse(
+      {required this.success, required this.data, required this.message});
 
-String userToJson(List<User> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+  factory GetUserResponse.fromJson(Map<String, dynamic> json) {
+    return GetUserResponse(
+      success: json['success'],
+      data: List<User>.from(json['data'].map((x) => User.fromJson(x))),
+      message: json['message'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'success': success,
+      'data': List<dynamic>.from(data.map((x) => x.toJson())),
+      'message': message,
+    };
+  }
+}
 
 class User {
-  User({
-    this.idUser,
-    this.name,
-    this.username,
-    this.jk,
-    this.alamat,
-    this.level,
-    this.idPosyandu,
-    this.createdAt,
-    this.updatedAt,
-  });
+  final String name;
+  final String username;
 
-  int? idUser;
-  String? name;
-  String? username;
-  String? jk;
-  String? alamat;
-  String? level;
-  int? idPosyandu;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  User(this.name, this.username);
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        idUser: json["id_user"],
-        name: json["name"],
-        username: json["username"],
-        jk: json["jk"],
-        alamat: json["alamat"],
-        level: json["level"],
-        idPosyandu: json["id_posyandu"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
-      );
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      json['name'],
+      json['username'],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "id_user": idUser,
-        "name": name,
-        "username": username,
-        "jk": jk,
-        "alamat": alamat,
-        "level": level,
-        "id_posyandu": idPosyandu,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'username': username,
+    };
+  }
 }

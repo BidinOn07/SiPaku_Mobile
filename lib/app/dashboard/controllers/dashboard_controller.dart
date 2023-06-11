@@ -45,7 +45,7 @@ class DashboardController extends GetxController {
           AssetImage(ImageRasterPath.avatar4),
         ],
         onPressed: () {
-          Get.to(() => DaftarpenyakitView());
+          Get.to(() => DaftarPenyakitView());
         },
       ),
       TaskCardData(
