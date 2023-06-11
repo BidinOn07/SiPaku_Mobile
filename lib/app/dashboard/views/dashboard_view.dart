@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipaku/app/components/overview_header.dart';
-// binding
 
+//comnponents
 import '../../components/responsive_builder.dart';
 import '../../components/task_card.dart';
 import '../../constans/app_constants.dart';
