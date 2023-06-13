@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, avoid_function_literals_in_foreach_calls
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipaku/app/daftarpenyakit/views/daftarpenyakit_view.dart';

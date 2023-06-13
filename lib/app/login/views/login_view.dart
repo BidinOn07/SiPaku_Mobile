@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, prefer_const_constructors, use_build_context_synchronously, prefer_const_constructors_in_immutables, avoid_unnecessary_containers
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
