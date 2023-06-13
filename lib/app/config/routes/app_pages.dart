@@ -15,8 +15,8 @@ import '../../profile/ubah_profile/views/screens/ubah_akun_screen.dart';
 import '../../profile/ubah_profile/views/screens/ubah_password_screen.dart';
 import '../../profile/views/profile_view.dart';
 
-import '../../sign_in/bindings/sign_in_binding.dart';
-import '../../sign_in/views/sign_in_view.dart';
+import '../../register/bindings/regster_binding.dart';
+import '../../register/views/register_view.dart';
 import '../../splash/bindings/splash_binding.dart';
 import '../../splash/views/splash_view.dart';
 
@@ -62,7 +62,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DAFTARPENYAKIT,
-      page: () => const DaftarpenyakitView(),
+      page: () => const DaftarPenyakitView(),
       binding: DaftarpenyakitBinding(),
     ),
     GetPage(
@@ -72,8 +72,8 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SIGN_IN,
-      page: () => const SignInView(),
-      binding: SignInBinding(),
+      page: () => const RegisterView(),
+      binding: RegisterBinding(),
     ),
     GetPage(
       name: _Paths.DETEKSI,

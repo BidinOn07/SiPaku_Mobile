@@ -26,13 +26,15 @@ class GetUserResponse {
 class User {
   final String name;
   final String username;
+  final String password;
 
-  User(this.name, this.username);
+  User(this.name, this.username, this.password);
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       json['name'],
       json['username'],
+      json['password'],
     );
   }
 
@@ -40,6 +42,7 @@ class User {
     return {
       'name': name,
       'username': username,
+      'password': password,
     };
   }
 }

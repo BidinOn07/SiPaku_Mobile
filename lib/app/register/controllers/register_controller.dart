@@ -2,7 +2,7 @@
 
 import 'package:get/get.dart';
 
-class SignInController extends GetxController {
+class RegisterController extends GetxController {
 
   final count = 0.obs;
   @override

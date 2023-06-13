@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipaku/app/login/views/login_view.dart';
 
-import '../controllers/sign_in_controller.dart';
+import '../controllers/register_controller.dart';
 
-class SignInView extends StatefulWidget {
-  const SignInView({super.key});
+class RegisterView extends StatefulWidget {
+  const RegisterView({super.key});
 
   @override
-  State<SignInView> createState() => _SignInViewState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _SignInViewState extends State<SignInView> {
+class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

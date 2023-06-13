@@ -1,22 +1,27 @@
-// ignore_for_file: unused_import, unused_field, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
-import 'package:sipaku/app/sign_in/views/sign_in_view.dart';
+import 'package:sipaku/app/models/user.dart';
+import 'package:sipaku/app/register/views/register_view.dart';
 
 import '../../dashboard/views/dashboard_view.dart';
+import '../../urls/urls.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends StatefulWidget {
-  LoginView({super.key});
+  LoginView({Key? key}) : super(key: key);
 
   @override
   State<LoginView> createState() => _LoginViewState();
-  final _formKey = GlobalKey<FormState>();
 }
 
 class _LoginViewState extends State<LoginView> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +51,7 @@ class _LoginViewState extends State<LoginView> {
               height: 20,
             ),
             TextFormField(
+              controller: _usernameController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 focusedBorder: OutlineInputBorder(
@@ -63,6 +69,7 @@ class _LoginViewState extends State<LoginView> {
               height: 20,
             ),
             TextFormField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -82,41 +89,83 @@ class _LoginViewState extends State<LoginView> {
             SizedBox(
               height: 20,
             ),
-            Card(
-              color: Colors.lightBlue,
-              elevation: 5,
-              child: Container(
-                height: 50,
-                child: InkWell(
-                  splashColor: Colors.white,
-                  onTap: () {
-                    Get.to(() => DashboardScreen());
-                  },
-                  child: Center(
-                      child: Text("Masuk",
-                          style: TextStyle(fontSize: 20, color: Colors.white))),
-                ),
-              ),
+            ElevatedButton(
+              onPressed: () {
+                login();
+              },
+              child: Text("Masuk"),
             ),
-            Card(
-              color: Colors.lightBlue,
-              elevation: 5,
-              child: Container(
-                height: 50,
-                child: InkWell(
-                  splashColor: Colors.white,
-                  onTap: () {
-                    Get.to(() => SignInView());
-                  },
-                  child: Center(
-                      child: Text("Register",
-                          style: TextStyle(fontSize: 20, color: Colors.white))),
-                ),
-              ),
+            SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () {
+                Get.to(() => RegisterView());
+              },
+              child: Text("Register"),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void login() async {
+    String username = _usernameController.text;
+    String password = _passwordController.text;
+
+    // Buat body request dengan username dan password
+    var requestBody = jsonEncode({
+      'username': username,
+      'password': password,
+    });
+
+    var response = await http.post(
+      Uri.parse('http://127.0.0.1:8000/api/user'),
+      headers: {'Content-Type': 'application/json'},
+      body: requestBody,
+    );
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      // Periksa apakah login berhasil berdasarkan respon dari API
+      if (jsonData['success'] == true) {
+        // Redirect ke halaman Dashboard setelah login berhasil
+        Get.to(() => DashboardScreen());
+      } else {
+        // Tampilkan pesan error jika login gagal
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("Login Gagal"),
+            content: Text(jsonData['message']),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          ),
+        );
+      }
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Error"),
+          content: Text("Terjadi kesalahan saat melakukan login."),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }
